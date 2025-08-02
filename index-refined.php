@@ -1731,54 +1731,69 @@ try {
       
 </div>      
     <footer class="footer-section" id="footer">
-        <div class="container container-xxl">
-            <div class="row">
-                <div class="col-md-4 col-lg-3">
-                    <h5>About Bitrise Solutions</h5>
-                    <p>
-                        Bitrise Solutions is dedicated to empowering organizations with cutting-edge technology. We specialize in innovative software solutions that boost efficiency and drive business growth across all industries.
-                    </p>
-                    <div class="social-icons mt-4">
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-                <div class="col-md-4 col-lg-3">
-                    <h5>Quick Links</h5>
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="about.php">About Us</a></li>
-                        <li><a href="services.php">Services</a></li>
-                        <li><a href="portfolio.php">Our Experts</a></li>
-                        <li><a href="contact.php">Contact</a></li>
-                        <li><a href="#">Get a Quote</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-4 col-lg-3">
-                    <h5>Contact Us</h5>
-                    <p><i class="fas fa-map-marker-alt me-2"></i>Nakuru - Egerton; Nairobi, Imaara Daima</p>
-                    <p><i class="fas fa-phone-alt me-2"></i><a href="tel:+254112054071" style="color: inherit;">+254 11205 4071</a></p>
-                    <p><i class="fas fa-envelope me-2"></i><a href="mailto:info@bitrisesolutions.co.ke" style="color: inherit;">info@bitrisesolutions.co.ke</a></p>
-                    <p><i class="fas fa-clock me-2"></i>Mon-Fri: 09:00am - 05:00pm</p>
-                </div>
-                <div class="col-md-4 col-lg-3">
-                    <h5>Newsletter</h5>
-                    <p>Stay updated with our latest news and offers.</p>
-                    <form action="subscribe.php" method="POST" class="newsletter-form">
-                        <div class="input-group mb-3">
-                            <input type="email" name="email" class="form-control" placeholder="Your email address" aria-label="Your email address" required>
-                            <button class="btn btn-subscribe" type="submit">Subscribe</button>
-                        </div>
-                    </form>
+    <div class="container container-xxl">
+        <div class="row">
+            <div class="col-md-4 col-lg-3">
+                <h5>About Bitrise Solutions</h5>
+                <p>
+                    Bitrise Solutions is dedicated to empowering organizations with cutting-edge technology. We specialize in innovative software solutions that boost efficiency and drive business growth across all industries.
+                </p>
+                <div class="social-icons mt-4">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
-            <div class="footer-bottom">
-                &copy; <span id="currentYear"></span> Bitrise Solutions. All rights reserved.
+            <div class="col-md-4 col-lg-3">
+                <h5>Quick Links</h5>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="about.php">About Us</a></li>
+                    <li><a href="services.php">Services</a></li>
+                    <li><a href="portfolio.php">Our Experts</a></li>
+                    <li><a href="contact.php">Contact</a></li>
+                    <li><a href="#">Get a Quote</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4 col-lg-3">
+                <h5>Contact Us</h5>
+                <p><i class="fas fa-map-marker-alt me-2"></i>Nakuru - Egerton; Nairobi, Imaara Daima</p>
+                <p style="margin-bottom: 0;">
+                    <i class="fas fa-phone-alt me-2"></i>
+                    <a href="tel:+254748700546" 
+                       onmouseover="this.style.color='#25D366'; this.style.fontStyle='italic'; this.style.transform='scale(1.05)'" 
+                       onmouseout="this.style.color='inherit'; this.style.fontStyle='normal'; this.style.transform='scale(1)'" 
+                       style="color: inherit; text-decoration: none; transition: all 0.3s ease; display: inline-block;">
+                        0748 700 546
+                    </a>
+                    <span style="margin: 0 5px;">|</span>
+                    <a href="tel:+254112054071" 
+                       onmouseover="this.style.color='#25D366'; this.style.fontStyle='italic'; this.style.transform='scale(1.05)'" 
+                       onmouseout="this.style.color='inherit'; this.style.fontStyle='normal'; this.style.transform='scale(1)'" 
+                       style="color: inherit; text-decoration: none; transition: all 0.3s ease; display: inline-block;">
+                        0112 054 071
+                    </a>
+                </p>
+                <p><i class="fas fa-envelope me-2"></i><a href="mailto:info@bitrisesolutions.co.ke" style="color: inherit;">info@bitrisesolutions.co.ke</a></p>
+                <p><i class="fas fa-clock me-2"></i>Mon-Fri: 09:00am - 05:00pm</p>
+            </div>
+            <div class="col-md-4 col-lg-3">
+                <h5>Newsletter</h5>
+                <p>Stay updated with our latest news and offers.</p>
+                <form action="subscribe.php" method="POST" class="newsletter-form">
+                    <div class="input-group mb-3">
+                        <input type="email" name="email" class="form-control" placeholder="Your email address" aria-label="Your email address" required>
+                        <button class="btn btn-subscribe" type="submit">Subscribe</button>
+                    </div>
+                </form>
             </div>
         </div>
-    </footer>
+        <div class="footer-bottom">
+            &copy; <span id="currentYear"></span> Bitrise Solutions. All rights reserved.
+        </div>
+    </div>
+</footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
