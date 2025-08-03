@@ -1,6 +1,17 @@
- <?php
+<?php
 
-require_once 'config.php';
+require_once 'config.php'; 
+try {
+    $sql_team = "SELECT * FROM team_members ORDER BY display_order ASC";
+    $stmt_team = $pdo->prepare($sql_team);
+    $stmt_team->execute();
+    $team_members = $stmt_team->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    
+    $team_members = []; // Fallback to an empty array
+    error_log("Database error fetching team members: " . $e->getMessage());
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -9,12 +20,11 @@ require_once 'config.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <link rel="icon" type="image/x-icon" href="img/icon.png">
-    <title>Bitrise Solutions - About Us</title>
+    <title>Bitrise Solutions - Our Team</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-        /* Your existing CSS styles go here */
         .top-info-bar {
             background-color: #1A2E40;
             color: #E0E7EB;
@@ -549,6 +559,13 @@ require_once 'config.php';
             font-weight: 500;
         }
 
+        a{
+            text-decoration: none;
+            color: blue;
+        }
+
+
+
         /* Footer Styles */
         .footer-section {
             background-color: #1A2E40;
@@ -666,7 +683,7 @@ require_once 'config.php';
             box-shadow: 0 4px 8px rgba(0,0,0,.1);
         }
 
-        /* About Us Page Specific Styles */
+        /* About Us Page Specific Styles (Keep these as they were in the original file) */
         .about-section {
             padding: 80px 0;
             background-color: #ffffff;
@@ -728,32 +745,6 @@ require_once 'config.php';
             line-height: 1.6;
         }
 
-        @media (max-width: 767.98px) {
-            .mission-vision-section .card {
-                width: 100%;
-                margin-left: 0;
-                margin-right: 0;
-                padding: 25px;
-            }
-            
-            .mission-vision-section .col-md-4 {
-                padding-left: 15px;
-                padding-right: 15px;
-                flex: 0 0 100%;
-                max-width: 100%;
-                margin-bottom: 20px;
-            }
-            
-            .mission-vision-section .row {
-                margin-left: 0;
-                margin-right: 0;
-            }
-            
-            .mission-vision-section .card i {
-                font-size: 2.5em;
-            }
-        }
-
         .team-section {
             padding: 80px 0;
             background-color: #ffffff;
@@ -810,103 +801,6 @@ require_once 'config.php';
             color: #E74C3C;
         }
 
-        /* What We Do Section */
-        .what-we-do-section {
-    padding: 80px 0;
-    background-color: #FFFFFF;
-}
-.what-we-do-section h2 {
-    color: #1A2E40;
-    font-size: 2.8em;
-    font-weight: 700;
-    margin-bottom: 50px;
-    text-align: center;
-}
-.what-we-do-section h2 span {
-    color: #E74C3C;
-}
-.what-we-do-section .row {
-    gap: 30px; /* Consistent spacing between items */
-    justify-content: center;
-}
-.service-card {
-    background-color: #F8F8F8;
-    border-radius: 15px;
-    padding: 30px;
-    margin-bottom: 30px; /* Increased bottom margin */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-    transition: all 0.3s ease;
-    height: 100%;
-    border-left: 5px solid #E74C3C;
-}
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-            background-color: #FFFFFF;
-        }
-        .service-card i {
-            color: #E74C3C;
-            font-size: 2em;
-            margin-bottom: 20px;
-            display: block;
-        }
-        .service-card h4 {
-            color: #1A2E40;
-            font-size: 1.5em;
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-        .service-card p {
-            color: #555555;
-            font-size: 1em;
-            line-height: 1.6;
-        }
-
-        /* Why Choose Us Section */
-        .why-choose-section {
-            background-color: #f8f9fa;
-            padding: 80px 0;
-        }
-        .why-choose-section h2 {
-            color: #1A2E40;
-            font-size: 2.8em;
-            font-weight: 700;
-            margin-bottom: 50px;
-            text-align: center;
-        }
-        .why-choose-section h2 span {
-            color: #E74C3C;
-        }
-        .advantage-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 30px;
-        }
-        .advantage-icon {
-            flex-shrink: 0;
-            width: 60px;
-            height: 60px;
-            background-color: #E74C3C;
-            color: #FFFFFF;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5em;
-            margin-right: 20px;
-        }
-        .advantage-content h4 {
-            color: #1A2E40;
-            font-size: 1.3em;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-        .advantage-content p {
-            color: #555555;
-            font-size: 1em;
-            line-height: 1.6;
-        }
-
         @media (max-width: 767.98px) {
             .top-info-bar .info-item {
                 justify-content: center;
@@ -940,12 +834,6 @@ require_once 'config.php';
                 width: 100%; /* Cover the whole section on smaller screens if desired */
                 background-position: center center;
             }
-            .about-intro-section .tagline {
-                font-size: 1.5em;
-            }
-            .highlight-card {
-                width: 100%;
-            }
         }
         @media (min-width: 768px) {
             .top-info-bar .info-item {
@@ -961,281 +849,31 @@ require_once 'config.php';
                 text-align: center !important;
             }
         }
+        /* --- End of Provided CSS --- */
 
-        .aqua-container {
-            background-color: rgba(20, 160, 160, 0.1); /* Aqua with 10% opacity */
-            backdrop-filter: blur(5px);
-            border-radius: 45px;
-            padding: 40px;
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 255, 255, 0.1);
-            margin-bottom: 40px;
-        }
-
-      
-        .about-intro-section {
-            background-color: #1A2E40;
-            border-radius:15px;
-            color: #E0E7EB;
-            padding: 80px 0;
-            position: relative;
-            overflow: hidden;
-        }
-        .about-intro-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(231, 76, 60, 0.1) 0%, rgba(26, 46, 64, 0.9) 100%);
-            z-index: 0;
-        }
-        .about-intro-content {
-            position: relative;
-            z-index: 1;
-        }
-        .about-intro-section h2 {
-            color: #E74C3C;
-            font-size: 2.5em;
-            font-weight: 700;
-            margin-bottom: 30px;
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        .about-intro-section .tagline {
-            font-size: 1.8em;
-            font-weight: 600;
-            color: #FFFFFF;
-            text-align: center;
-            margin-bottom: 30px;
-            position: relative;
-            display: inline-block;
-        }
-        .about-intro-section .tagline::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background-color: #E74C3C;
-        }
-        .about-intro-section .intro-text {
-            font-size: 1.2em;
-            line-height: 1.8;
-            margin-bottom: 30px;
-            text-align: center;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .about-highlights {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 30px;
-            margin-top: 50px;
-        }
-        .highlight-card {
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 30px;
-            width: 280px;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .highlight-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-            background-color: rgba(231, 76, 60, 0.2);
-        }
-        .highlight-card i {
-            font-size: 2.5em;
-            color: #E74C3C;
+        /* Additional styles for the team member modal (view function) */
+        .modal-body img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
             margin-bottom: 20px;
-            display: block;
+            border: 5px solid #E74C3C;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
-        .highlight-card h4 {
-            color: #FFFFFF;
-            font-size: 1.4em;
-            font-weight: 600;
-            margin-bottom: 15px;
+        .modal-body .social-links a {
+            font-size: 1.8em;
+            margin: 0 10px;
+            color: #1A2E40;
+            transition: color 0.3s ease;
         }
-        .highlight-card p {
-            color: #E0E7EB;
-            font-size: 1em;
-            line-height: 1.6;
+        .modal-body .social-links a:hover {
+            color: #E74C3C;
         }
-
-        @media (max-width: 767.98px) {
-            .aqua-container {
-                padding: 25px;
-                border-radius: 30px;
-            }
-            .about-intro-section .tagline {
-                font-size: 1.5em;
-            }
-            .highlight-card {
-                width: 100%;
-            }
+        .modal-body p {
+            text-align: left;
+            margin-top: 15px;
         }
-
-    /* Enhanced WhatsApp Floating Button with Dropdown */
-    .whatsapp-container {
-        position: fixed;
-        bottom: 25px;
-        right: 25px;
-        z-index: 1000;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-    }
-
-    .whatsapp-float {
-        background: linear-gradient(135deg, #25D366, #128C7E);
-        color: white;
-        border: none;
-        border-radius: 50%;
-        width: 60px;
-        height: 60px;
-        font-size: 28px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        box-shadow: 0 6px 15px rgba(37, 211, 102, 0.3);
-        cursor: pointer;
-        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-        position: relative;
-        overflow: hidden;
-        z-index: 2;
-    }
-
-    .whatsapp-float::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 50%;
-        transform: scale(0);
-        transition: transform 0.3s ease;
-    }
-
-    .whatsapp-float:hover {
-        transform: scale(1.1) rotate(5deg);
-        box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
-    }
-
-    .whatsapp-float:hover::before {
-        transform: scale(1);
-    }
-
-    .whatsapp-float:active {
-        transform: scale(0.95);
-    }
-
-    .whatsapp-dropdown {
-        position: absolute;
-        bottom: 70px;
-        right: 0;
-        background: white;
-        border-radius: 12px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-        width: 220px;
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(15px);
-        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        border: 1px solid rgba(0, 0, 0, 0.05);
-        overflow: hidden;
-        z-index: 1;
-    }
-
-    .whatsapp-container:hover .whatsapp-dropdown {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-    }
-
-    .whatsapp-option {
-        display: flex;
-        align-items: center;
-        padding: 14px 18px;
-        color: #333;
-        text-decoration: none;
-        transition: all 0.2s ease;
-        background: white;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    }
-
-    .whatsapp-option i {
-        margin-right: 12px;
-        color: #25D366;
-        font-size: 22px;
-        transition: transform 0.2s ease;
-    }
-
-    .whatsapp-option .option-text {
-        flex: 1;
-        font-weight: 500;
-        font-size: 15px;
-    }
-
-    .whatsapp-option .option-subtext {
-        font-size: 12px;
-        color: #777;
-        margin-top: 2px;
-    }
-
-    .whatsapp-option:hover {
-        background: #f8f8f8;
-        color: #25D366;
-    }
-
-    .whatsapp-option:hover i {
-        transform: scale(1.1);
-    }
-
-    .whatsapp-option:first-child {
-        border-top-left-radius: 12px;
-        border-top-right-radius: 12px;
-    }
-
-    .whatsapp-option:last-child {
-        border-bottom: none;
-        border-bottom-left-radius: 12px;
-        border-bottom-right-radius: 12px;
-    }
-
-    /* Pulse animation */
-    @keyframes pulse {
-        0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-        70% { box-shadow: 0 0 0 12px rgba(37, 211, 102, 0); }
-        100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-    }
-
-    .pulse-animation {
-        animation: pulse 2s infinite;
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-        .whatsapp-dropdown {
-            width: 200px;
-            font-size: 14px;
-        }
-        
-        .whatsapp-option {
-            padding: 12px 15px;
-        }
-    }
-
     </style>
 </head>
 <body>
@@ -1244,8 +882,8 @@ require_once 'config.php';
         <div class="container-fluid container-xxl">
             <div class="row align-items-center">
                 <div class="col-md-6 d-flex justify-content-start">
-                    <span class="info-item me-4"><i class="fas fa-phone-alt"></i><a href="tel:+254112054071">+254 11205 4071</a> </span>
-                    <span class="info-item"><i class="fas fa-map-marker-alt"></i> Nakuru - Egerton; Nairobi, Imaara Daima</span>
+                    <span class="info-item me-4"><i class="fas fa-phone-alt"></i><a href="tel:+254112054071" style="color: white;">+254 11205 4071</a> </span>
+                    <span class="info-item"><i class="fas fa-map-marker-alt"></i> Nakuru - Egerton Njoro</span>
                 </div>
                 <div class="col-md-6 d-flex justify-content-end">
                     <span class="info-item me-4"><i class="fas fa-envelope"></i> info@bitrisesolutions.co.ke</span>
@@ -1271,13 +909,13 @@ require_once 'config.php';
                         <a class="nav-link" href="index.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="about.php">About Us</a>
+                        <a class="nav-link" href="about.php">About Us</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="services.php">Services</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="portfolio.php">Our Experts</a>
+                        <a class="nav-link active" aria-current="page" href="portfolio.php">Our Experts</a>
                     </li>
                       </li>
                        <li class="nav-item">
@@ -1287,7 +925,7 @@ require_once 'config.php';
                         <a class="nav-link" href="contact.php">Contact</a>
                     </li>
                     <li class="nav-item ms-lg-3">
-                        <button class="btn btn-custom-quote"><a href="">Request Call</a></button>
+                        <button class="btn btn-custom-quote">Get a Quote</button>
                     </li>
                 </ul>
             </div>
@@ -1297,217 +935,69 @@ require_once 'config.php';
     <div class="hero-section">
         <div id="particles-js"></div>
         <div class="container hero-content">
-            <h1>About <span>Bitrise Solutions</span></h1>
-            <p class="lead text-center">Your trusted partner in innovative software solutions and digital transformation.</p>
+            <h1>Meet <span>Our Experts</span></h1>
+            <p class="lead text-center">The brilliant minds driving innovation and success at Bitrise Solutions.</p>
         </div>
     </div>
 
-    <!-- New About Intro Section -->
-   <section class="about-intro-section">
-    <div class="container about-intro-content">
-        <div class="animate-on-scroll" style="--delay: 0s;">
-            <div class="aqua-container">
-                <h2>About Us</h2>
-                <div class="tagline">"Designing Ideas. Building Solutions. Empowering Growth."</div>
-                <p class="intro-text">
-                    At Bitrise Solutions, we deliver forward-thinking digital solutions, empowering businesses to look better, work smarter, and connect deeper with their audience across Kenya to thrive in a connected world. With a passion for innovation and a commitment to excellence, we partner with clients to build secure, efficient, and scalable digital experiences.
-                </p>
-            </div>
-        </div>
-        
-        <div class="about-highlights">
-            <div class="highlight-card animate-on-scroll" style="--delay: 0.1s;">
-                <i class="fas fa-lightbulb"></i>
-                <h4>Innovative Approach</h4>
-                <p>We combine creativity with technology to deliver solutions that stand out in the market and drive real business impact.</p>
-            </div>
-            
-            <div class="highlight-card animate-on-scroll" style="--delay: 0.2s;">
-                <i class="fas fa-users"></i>
-                <h4>Client-Centric</h4>
-                <p>Your success is our priority. We listen, understand, and deliver solutions tailored to your unique business needs.</p>
-            </div>
-            
-            <div class="highlight-card animate-on-scroll" style="--delay: 0.3s;">
-                <i class="fas fa-chart-line"></i>
-                <h4>Growth Focused</h4>
-                <p>Our solutions are designed to scale with your business, ensuring long-term value and continuous improvement.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-    <section class="about-section">
+    <section class="team-section">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6 mb-4 mb-lg-0 animate-on-scroll" style="--delay: 0s;">
-                    <img src="img/banner-bitrise.png" alt="About Bitrise Solutions" class="img-fluid about-image">
-                </div>
-                <div class="col-lg-6 animate-on-scroll" style="--delay: 0.2s;">
-                    <h2>Who We <span>Are</span></h2>
-                    <p>Founded on a mission to transform businesses through technology, our team combines deep technical expertise with creativity and strategy. Every solution is crafted with precision, from responsive websites to mobile apps, graphic designs to digital marketing campaigns. We believe in building long-term relationships with our clients, grounded in trust, transparency, and shared success.</p>
-                    <p>Bitrise Solutions is a leading technology company dedicated to providing cutting-edge software development, IT consulting, and digital solutions. Established with a passion for innovation and a commitment to excellence, we empower businesses of all sizes to thrive in the digital age.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="mission-vision-section">
-        <div class="container">
-            <h2 class="section-title animate-on-scroll" style="--delay: 0s;">Our <span>Foundation</span></h2>
+            <h2>Our Dedicated <span>Team</span></h2>
             <div class="row justify-content-center">
-                <div class="col-md-4 mb-4 animate-on-scroll" style="--delay: 0.1s;">
-                    <div class="card">
-                        <i class="fas fa-bullseye"></i>
-                        <h4>Our Mission</h4>
-                        <p>To deliver innovative, secure, and efficient software solutions that drive operational excellence and sustainable growth for our clients.</p>
+                <?php foreach ($team_members as $member): ?>
+                    <div class="col-md-4 col-sm-6 mb-4 animate-on-scroll" style="--delay: 0.1s;">
+                        <div class="team-member-card" >
+                            <img src="<?php echo htmlspecialchars($member['image']); ?>" alt="<?php echo htmlspecialchars($member['name']); ?>">
+                            <h5><?php echo htmlspecialchars($member['name']); ?></h5>
+                            <p class="title"><?php echo htmlspecialchars($member['role']); ?></p>
+                            <p><?php echo htmlspecialchars(substr($member['bio'], 0, 100)); ?>... <a href="#" data-bs-toggle="modal" data-bs-target="#teamMemberModal" data-member-id="<?php echo $member['id']; ?>">Read More</a></p>
+                            <div class="social-links">
+                                <?php if (!empty($member['social_media']['twitter'])): ?>
+                                    <a href="<?php echo htmlspecialchars($member['social_media']['twitter']); ?>" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                                <?php endif; ?>
+                                <?php if (!empty($member['social_media']['linkedin'])): ?>
+                                    <a href="<?php echo htmlspecialchars($member['social_media']['linkedin']); ?>" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                                <?php endif; ?>
+                                <?php if (!empty($member['social_media']['github'])): ?>
+                                    <a href="<?php echo htmlspecialchars($member['social_media']['github']); ?>" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                                <?php endif; ?>
+                                <?php if (!empty($member['social_media']['dribbble'])): ?>
+                                    <a href="<?php echo htmlspecialchars($member['social_media']['dribbble']); ?>" target="_blank" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
+                                <?php endif; ?>
+                                </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-4 mb-4 animate-on-scroll" style="--delay: 0.2s;">
-                    <div class="card">
-                        <i class="fas fa-eye"></i>
-                        <h4>Our Vision</h4>
-                        <p>To be Kenya's go-to team for digital transformation; trusted, creative, and always a step ahead.</p>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4 animate-on-scroll" style="--delay: 0.3s;">
-                    <div class="card">
-                        <i class="fas fa-handshake"></i>
-                        <h4>Our Values</h4>
-                        <p>Innovation | Integrity | Client-Centricity | Excellence | Collaboration | Continuous Learning</p>
-                    </div>
-                </div>
+                <?php endforeach; ?>
             </div>
         </div>
     </section>
 
-    <!-- What We Do Section -->
-    <section class="what-we-do-section">
-        <div class="container">
-            <h2 class="animate-on-scroll" style="--delay: 0s;">What We <span>Do Best</span></h2>
-            <div class="row">
-                <div class="col-md-4 animate-on-scroll" style="--delay: 0.1s;">
-                    <div class="service-card">
-                        <i class="fas fa-laptop-code"></i>
-                        <h4>Custom Software & Web Development</h4>
-                        <p>Responsive, user-focused websites and applications tailored to your specific business requirements.</p>
-                    </div>
+    <div class="modal fade" id="teamMemberModal" tabindex="-1" aria-labelledby="teamMemberModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="teamMemberModalLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="col-md-4 animate-on-scroll" style="--delay: 0.2s;">
-                    <div class="service-card">
-                        <i class="fas fa-mobile-alt"></i>
-                        <h4>Android & Mobile App Development</h4>
-                        <p>Native solutions that enhance user experience and drive engagement across all devices.</p>
-                    </div>
-                </div>
-                <div class="col-md-4 animate-on-scroll" style="--delay: 0.3s;">
-                    <div class="service-card">
-                        <i class="fas fa-paint-brush"></i>
-                        <h4>UI/UX & Graphic Design</h4>
-                        <p>Stunning visuals that tell your brand's story and create memorable user experiences.</p>
-                    </div>
-                </div>
-                <div class="col-md-4 animate-on-scroll" style="--delay: 0.4s;">
-                    <div class="service-card">
-                        <i class="fas fa-bullhorn"></i>
-                        <h4>Digital Marketing & Strategy</h4>
-                        <p>Comprehensive communications, branding, and client engagement solutions.</p>
-                    </div>
-                </div>
-                <div class="col-md-4 animate-on-scroll" style="--delay: 0.5s;">
-                    <div class="service-card">
-                        <i class="fas fa-headset"></i>
-                        <h4>IT Consulting & Support</h4>
-                        <p>Solutions that streamline operations and boost productivity across your organization.</p>
-                    </div>
-                </div>
-                <div class="col-md-4 animate-on-scroll" style="--delay: 0.6s;">
-                    <div class="service-card">
-                        <i class="fas fa-database"></i>
-                        <h4>Database Design & Backend Systems</h4>
-                        <p>Scalable architectures supporting long-term growth and business expansion.</p>
-                    </div>
+                <div class="modal-body text-center">
+                    <img id="modalMemberImage" src="" alt="Team Member">
+                    <h4 id="modalMemberName"></h4>
+                    <p class="text-muted" id="modalMemberRole"></p>
+                    <p id="modalMemberBio"></p>
+                    <div id="modalSocialLinks" class="social-links">
+                        </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Why Choose Us Section -->
-    <section class="why-choose-section">
-        <div class="container">
-            <h2 class="animate-on-scroll" style="--delay: 0s;">Why <span>Choose Us</span></h2>
-            <div class="row">
-                <div class="col-lg-6 animate-on-scroll" style="--delay: 0.1s;">
-                    <div class="advantage-item">
-                        <div class="advantage-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <div class="advantage-content">
-                            <h4>Full-spectrum Expertise</h4>
-                            <p>From design and user experience to backend architecture and marketing strategy, we cover all aspects of digital transformation.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 animate-on-scroll" style="--delay: 0.2s;">
-                    <div class="advantage-item">
-                        <div class="advantage-icon">
-                            <i class="fas fa-user-tie"></i>
-                        </div>
-                        <div class="advantage-content">
-                            <h4>Client-First Approach</h4>
-                            <p>We listen, collaborate, and deliver solutions that truly resonate with your business goals and audience needs.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 animate-on-scroll" style="--delay: 0.3s;">
-                    <div class="advantage-item">
-                        <div class="advantage-icon">
-                            <i class="fas fa-lightbulb"></i>
-                        </div>
-                        <div class="advantage-content">
-                            <h4>Innovative Execution</h4>
-                            <p>Creative thinking powered by technical accuracy and efficiency to deliver solutions that give you a competitive edge.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 animate-on-scroll" style="--delay: 0.4s;">
-                    <div class="advantage-item">
-                        <div class="advantage-icon">
-                            <i class="fas fa-expand"></i>
-                        </div>
-                        <div class="advantage-content">
-                            <h4>Scalable & Secure</h4>
-                            <p>Our solutions are built to perform and grow with your business, with security as a fundamental consideration.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 animate-on-scroll" style="--delay: 0.5s;">
-                    <div class="advantage-item">
-                        <div class="advantage-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <div class="advantage-content">
-                            <h4>Local Insight, Professional Standards</h4>
-                            <p>Rooted in Kenya, we understand the local market while maintaining international quality standards. We stay local, but think big.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 animate-on-scroll" style="--delay: 0.6s;">
-                    <div class="advantage-item">
-                        <div class="advantage-icon">
-                            <i class="fas fa-handshake"></i>
-                        </div>
-                        <div class="advantage-content">
-                            <h4>Proven Track Record</h4>
-                            <p>We've successfully delivered solutions for businesses across various industries, helping them achieve their digital goals.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-<footer class="footer-section" id="footer">
+    <div class="whatsapp-float">
+        <a href="https://wa.me/254112054071" target="_blank" aria-label="Chat on WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+ <footer class="footer-section" id="footer">
     <div class="container container-xxl">
         <div class="row">
             <div class="col-md-4 col-lg-3">
@@ -1571,34 +1061,13 @@ require_once 'config.php';
         </div>
     </div>
 </footer>
-    
-      <div class="whatsapp-container">
-    <button class="whatsapp-float pulse-animation" aria-label="WhatsApp Chat">
-        <i class="fab fa-whatsapp"></i>
-    </button>
-    <div class="whatsapp-dropdown">
-        <a href="https://wa.me/+254112054071" target="_blank" class="whatsapp-option">
-            <i class="fab fa-whatsapp"></i>
-            <div>
-                <div class="option-text">Support Team 1</div>
-                <div class="option-subtext">Joel - Sales</div>
-            </div>
-        </a>
-        <a href="https://wa.me/+254714500555" target="_blank" class="whatsapp-option">
-            <i class="fab fa-whatsapp"></i>
-            <div>
-                <div class="option-text">Support Team 2</div>
-                <div class="option-subtext">Josphat - Technical</div>
-            </div>
-        </a>
-    </div>
-</div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script>
-        // Particles.js configuration
-        particlesJS("particles-js", {
+        // Particles.js initialization (from your original file)
+        particlesJS('particles-js', {
             "particles": {
                 "number": {
                     "value": 80,
@@ -1709,31 +1178,73 @@ require_once 'config.php';
             "retina_detect": true
         });
 
-        // Intersection Observer for scroll animations
+        // Animation on scroll logic (from your original file)
         document.addEventListener("DOMContentLoaded", function() {
-            const elements = document.querySelectorAll('.animate-on-scroll');
-
-            const observerOptions = {
-                root: null, // viewport
-                rootMargin: '0px',
-                threshold: 0.1 // 10% of the element must be visible
-            };
+            const animateElements = document.querySelectorAll('.animate-on-scroll');
 
             const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('is-visible');
-                        observer.unobserve(entry.target); // Stop observing once animated
+                        observer.unobserve(entry.target);
                     }
                 });
-            }, observerOptions);
-
-            elements.forEach(element => {
-                observer.observe(element);
+            }, {
+                threshold: 0.1
             });
 
-            // Update copyright year
-            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            animateElements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+
+        // Team Member Modal Logic
+        document.addEventListener('DOMContentLoaded', function() {
+            var teamMemberModal = document.getElementById('teamMemberModal');
+            teamMemberModal.addEventListener('show.bs.modal', function (event) {
+                // Button that triggered the modal
+                var button = event.relatedTarget;
+                // Extract info from data-bs-whatever attributes
+                var memberId = button.getAttribute('data-member-id');
+
+                // In a real application, you'd fetch the member details from your PHP backend
+                // using AJAX based on the memberId.
+                // For this static example, we'll find the member in the JavaScript array.
+                const teamMembers = <?php echo json_encode($team_members); ?>;
+                const member = teamMembers.find(m => m.id == memberId);
+
+                if (member) {
+                    var modalTitle = teamMemberModal.querySelector('.modal-title');
+                    var modalImage = teamMemberModal.querySelector('#modalMemberImage');
+                    var modalName = teamMemberModal.querySelector('#modalMemberName');
+                    var modalRole = teamMemberModal.querySelector('#modalMemberRole');
+                    var modalBio = teamMemberModal.querySelector('#modalMemberBio');
+                    var modalSocialLinks = teamMemberModal.querySelector('#modalSocialLinks');
+
+                    modalTitle.textContent = member.name;
+                    modalImage.src = member.image;
+                    modalName.textContent = member.name;
+                    modalRole.textContent = member.role;
+                    modalBio.textContent = member.bio;
+
+                    // Clear previous social links
+                    modalSocialLinks.innerHTML = '';
+                    if (member.social_media) {
+                        if (member.social_media.twitter) {
+                            modalSocialLinks.innerHTML += `<a href="${member.social_media.twitter}" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>`;
+                        }
+                        if (member.social_media.linkedin) {
+                            modalSocialLinks.innerHTML += `<a href="${member.social_media.linkedin}" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>`;
+                        }
+                        if (member.social_media.github) {
+                            modalSocialLinks.innerHTML += `<a href="${member.social_media.github}" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>`;
+                        }
+                        if (member.social_media.dribbble) {
+                            modalSocialLinks.innerHTML += `<a href="${member.social_media.dribbble}" target="_blank" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>`;
+                        }
+                    }
+                }
+            });
         });
     </script>
 </body>
